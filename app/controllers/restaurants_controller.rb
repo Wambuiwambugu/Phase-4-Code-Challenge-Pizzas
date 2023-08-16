@@ -9,7 +9,7 @@ class RestaurantsController < ApplicationController
         if restaurant
             render json: restaurant.as_json( except: [:created_at, :updated_at], include: {pizzas: {except: [:created_at, :updated_at]}})
         else
-            render json: {error: "Restaurant not found"}, status: :not_found
+            render_not_found
         end
     end
 
@@ -19,7 +19,12 @@ class RestaurantsController < ApplicationController
             restaurant.destroy
             head :no_content
         else 
-            render json: {error: "Restaurant not found"}, status: :not_found
+            render_not_found
         end
     end
+
+    private
+     def render_not_found
+        render json: {error: "Restaurant not found"}, status: :not_found
+     end
 end
