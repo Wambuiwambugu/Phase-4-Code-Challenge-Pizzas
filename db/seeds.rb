@@ -1,10 +1,12 @@
 require 'faker'
 puts "Deleteing old data..."
+
 RestaurantPizza.destroy_all
 Pizza.destroy_all
 Restaurant.destroy_all
 
 puts "Creating pizzas..."
+
 10.times do 
     pizza = Pizza.create(
         name: Faker::Space.star,
@@ -13,6 +15,7 @@ puts "Creating pizzas..."
 end
 
 puts "Creating Restaurants..."
+
 4.times do
     restaurant = Restaurant.create(
         name: Faker::Restaurant.name,
@@ -20,7 +23,8 @@ puts "Creating Restaurants..."
     )
 end
 
-put "Creatinn restaurant pizzas..."
+puts "Creatinn restaurant pizzas..."
+
 15.times do
     pizza = Pizza.order('RANDOM()').first
     restaurant = Restaurant.order('RANDOM()').first

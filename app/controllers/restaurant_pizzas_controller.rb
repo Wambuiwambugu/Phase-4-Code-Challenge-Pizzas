@@ -1,8 +1,8 @@
 class RestaurantPizzasController < ApplicationController
     def create
-        restaurant_pizza = RestaurantPizza.create(restaurant_pizza_params)
+        restaurant_pizza = RestaurantPizza.new(restaurant_pizza_params)
         if restaurant_pizza.save
-            render json: restaurant_pizza.pizza, status: :created 
+            render json: restaurant_pizza.pizza,except: [:created_at, :updated_at], status: :created 
         else 
             render json: {errors: ["Validation errors"]}, status: :unprocessable_entity
         end

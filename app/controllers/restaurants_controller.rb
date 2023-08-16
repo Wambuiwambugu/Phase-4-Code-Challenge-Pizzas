@@ -1,13 +1,13 @@
 class RestaurantsController < ApplicationController
     def index
         restaurants = Restaurant.all
-        render json: restaurants, status: :ok
+        render json: restaurants, except: [:created_at, :updated_at], status: :ok
     end
 
     def show 
         restaurant = Restaurant.find_by(id: params[:id])
         if restaurant
-            render json: restaurant, status: :ok
+            render json: restaurant.as_json( except: [:created_at, :updated_at], include: {pizzas: {except: [:created_at, :updated_at]}})
         else
             render json: {error: "Restaurant not found"}, status: :not_found
         end
