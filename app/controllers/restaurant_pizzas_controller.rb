@@ -4,7 +4,7 @@ class RestaurantPizzasController < ApplicationController
         if restaurant_pizza.valid?
             render json: restaurant_pizza.pizza,except: [:created_at, :updated_at], status: :created 
         else 
-            render json: {errors: ["Validation errors"]}, status: :unprocessable_entity
+            render json: {errors: restaurant_pizza.errors}, status: :unprocessable_entity
         end
     end
 
